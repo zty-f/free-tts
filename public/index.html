@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="在本机连接 Azure Speech，将文字合成为可下载的 MP3。">
+  <title>free-tts · Azure 语音工作台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip" href="#text">跳到文字编辑器</a>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="free-tts 首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13v6m7-13v20m8-16v12m7-8v4"/></svg></span>
+        <span>free-tts <small>AZURE SPEECH</small></span>
+      </a>
+      <div class="top-actions"><a href="/guide" target="_blank" rel="noopener" class="guide-link">从零开始教程 ↗</a><span class="local-badge"><span class="dot"></span> 本机运行 <span class="badge-divider">/</span> Azure Speech</span></div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <div><p class="eyebrow">一段文字，一种声音</p><h1 id="title">让文字，开口说话。</h1><p class="intro-copy">写下你想表达的，选一个声音。把灵感变成可以听见的作品。</p></div>
+        <button class="button secondary" id="settings-toggle" aria-expanded="true" aria-controls="connection"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16M8 4v6m8 4v6"/></svg>连接设置</button>
+      </section>
+
+      <section class="onboarding card" id="onboarding" aria-labelledby="onboarding-title">
+        <h2 id="onboarding-title">第一次使用？按这三步开始</h2>
+        <ol><li><a href="/guide/azure-registration" target="_blank" rel="noopener">注册 Azure 账号</a><span>手机号、银行卡完成验证</span></li><li><a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesSpeechServices" target="_blank" rel="noopener noreferrer">创建 Speech 资源 ↗</a><span>定价层选择 Free F0 · <a href="/guide/azure-f0-setup" target="_blank" rel="noopener">查看填写教程</a></span></li><li><strong>填写下方密钥和区域</strong><span>保存并连接，输入文字即可合成</span></li></ol>
+        <p>F0 每月 50 万计费字符；汉字通常按 2 个计费字符计算。<a href="/guide/free-quota" target="_blank" rel="noopener">免费额度说明</a> · <a href="/guide/subscription" target="_blank" rel="noopener">30 天后怎么办</a></p>
+      </section>
+
+      <section id="connection" class="connection card" aria-labelledby="connection-title">
+        <div class="connection-heading"><div><h2 id="connection-title">连接你的 Azure</h2><p>在 Azure 语音资源的「密钥和终结点」中找到以下信息。</p></div><span class="connection-state" id="connection-state">尚未配置</span></div>
+        <form id="config-form">
+          <div class="config-fields">
+            <div class="field"><label for="region">服务区域</label><input id="region" name="region" placeholder="例如 eastasia" autocomplete="off" spellcheck="false" required maxlength="40"><small>填写区域代码，与密钥所属资源一致。</small></div>
+            <div class="field key-field"><label for="key">Azure 密钥 <span>KEY 1 或 KEY 2</span></label><input id="key" name="key" type="password" placeholder="粘贴完整密钥" autocomplete="off" spellcheck="false" maxlength="256"><small id="key-hint">保存在本机，刷新和重启后仍可使用。</small></div>
+            <button class="button primary" type="submit" id="save-config">保存并连接</button>
+          </div>
+        </form>
+        <div class="connection-actions"><a href="/guide/azure-f0-setup" target="_blank" rel="noopener">密钥和区域在哪？</a><span>请在 Azure 控制台确认资源为 F0；连接成功不代表已验证免费层。</span><button id="clear-config" type="button" class="text-button" hidden>清除本机密钥</button></div>
+        <p class="feedback" id="config-feedback" role="status" aria-live="polite"></p>
+      </section>
+
+      <div class="workspace">
+        <section class="editor card" aria-labelledby="editor-title">
+          <div class="panel-heading"><h2 id="editor-title"><span class="section-number">01</span> 写下文字</h2><div class="editor-tools"><button id="example" class="text-button">试试示例</button><button id="clear" class="text-button">清空</button></div></div>
+          <label class="sr-only" for="text">需要合成的文字，每次最多 3000 个字符</label>
+          <textarea id="text" placeholder="可以是一段故事、一篇旁白，或一句想说的话……" spellcheck="false" aria-describedby="text-help count"></textarea>
+          <div class="editor-footer"><span id="text-help">支持中文、英文等多种语言</span><span id="count">0 / 3,000 字符</span></div>
+          <p class="usage-estimate" id="usage-estimate">正文预计 0 计费字符；不含 SSML 标记，非月度剩余额度。</p>
+        </section>
+
+        <aside class="voice-panel card" aria-labelledby="voice-title">
+          <div class="panel-heading"><h2 id="voice-title"><span class="section-number">02</span> 调好声音</h2></div>
+          <div class="voice-fields">
+            <div class="field"><label for="language">语言</label><select id="language"></select></div>
+            <div class="field"><div class="label-row"><label for="voice">音色</label><button type="button" class="text-button" id="refresh-voices">刷新音色</button></div><select id="voice"></select><small id="voice-hint">常用普通 Neural 音色</small></div>
+            <div class="range-field"><div class="label-row"><label for="rate">语速</label><output id="rate-value" for="rate">1.0×</output></div><input type="range" id="rate" min="-50" max="100" step="5" value="0"><div class="range-labels"><span>舒缓</span><span>轻快</span></div></div>
+            <div class="range-field"><div class="label-row"><label for="pitch">音调</label><output id="pitch-value" for="pitch">默认</output></div><input type="range" id="pitch" min="-20" max="20" step="1" value="0"><div class="range-labels"><span>低沉</span><span>明亮</span></div></div>
+            <button type="button" class="text-button reset" id="reset">恢复默认语速和音调</button>
+          </div>
+        </aside>
+      </div>
+
+      <section class="render-bar" aria-label="生成语音">
+        <div><p class="render-title" id="ready-title">准备好，让文字发声</p><p class="render-note">MP3 音频 · 每次最多 3,000 字符 · 生成消耗 Azure 资源额度</p></div>
+        <button id="generate" class="button primary generate" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z"/></svg><span>生成语音</span></button>
+      </section>
+      <p id="status" class="status" role="status" aria-live="polite" tabindex="-1">先在连接设置中保存密钥和区域，再输入文字。</p>
+
+      <section class="result card" id="result" hidden aria-labelledby="result-title">
+        <div class="result-art" aria-hidden="true"><svg viewBox="0 0 80 48"><path d="M6 21v6m9-14v22m9-30v38m9-25v12m9-20v28m9-34v40m9-28v16m9-20v24m9-15v6"/></svg></div>
+        <div class="result-main"><div class="result-heading"><h2 id="result-title">你的声音，已就绪</h2><span id="result-info"></span></div><audio id="audio" controls preload="metadata" aria-label="生成的语音"></audio><p class="feedback" id="audio-feedback" role="status"></p></div>
+        <a id="download" class="button secondary" download="语音.mp3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg>下载 MP3</a>
+      </section>
+
+      <section class="history card" id="history" hidden aria-labelledby="history-title"><div class="panel-heading"><h2 id="history-title">最近生成</h2><button type="button" id="clear-cache" class="text-button">清理本机音频</button></div><p class="history-note">最多保留 20 段。重放、下载和复用本机音频不请求 Azure。</p><div id="history-list"></div></section>
+
+      <footer><span>本地工具，云端合成。文字仅在生成时发送至 Microsoft Azure。</span><span>建议使用 F0 免费层 · 额度以 Azure 控制台为准</span></footer>
+    </main>
+  </div>
+</body>
+</html>

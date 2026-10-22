@@ -1,0 +1,12 @@
+.local/
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+*.mp3
+*.wav
+
+_site/

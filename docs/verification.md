@@ -1,4 +1,4 @@
-# 本地验证记录
+# 验证记录
 
 日期：2026-10-22。此文件只记录实际完成的验证，不证明其他账号一定注册成功、一定有 F0，或其他操作系统已通过实机测试。
 
@@ -22,8 +22,18 @@
 
 ## 仍需其他环境验证
 
-- Windows 和 Linux 提供启动方式与 CI 测试矩阵，但当前没有对应操作系统的实机验证记录。
-- Node.js 24 是教程推荐版本；这次实际运行环境为 Node.js 22，不能把推荐版本当作已实测版本。
+- Windows 和 Linux 已通过 GitHub 托管运行器上的自动化验证；桌面双击启动仍没有对应操作系统的实机验证记录。
+- 本机真实合成使用 Node.js 22；Node.js 24 通过 CI 的模拟上游测试，没有以真实 Azure 密钥在 CI 合成。
 - CI 结果可以在 [GitHub Actions](https://github.com/zty-f/free-tts/actions) 查看；CI 验证不等于桌面双击启动的实机验证。
 - 没有重新注册一个 Azure 新账号走完银行卡验证、等待 30 天试用到期或耗尽真实 F0 配额；这些流程的说明依据微软官方文档。
 - 公开发布仅包含源码、静态教程与下载，没有部署公共语音 API 或发布 npm 包。
+
+## 首次 GitHub 发布
+
+2026-10-22：源码推送至 [zty-f/free-tts](https://github.com/zty-f/free-tts)，静态首页和教程通过 GitHub Pages 发布。
+
+- [跨平台检查运行](https://github.com/zty-f/free-tts/actions/runs/39717967445)：ubuntu-latest、macos-latest、windows-latest，分别使用 Node.js 22 和 24，六组环境自检、自动测试、源码检查和打包全部通过。
+- [首次 Pages 部署](https://github.com/zty-f/free-tts/actions/runs/39717967598)：构建与部署全部通过；线上入口返回 HTTP 200。
+- 静态输出共 10 页，含 9 篇教程；测试检查 `/free-tts/` 下每页内部链接、CSS、示例图和 ZIP 下载文件存在。
+- 发布前比对本机真实密钥与全部白名单源码及静态产物，未发现密钥；`.local/` 和 `_site/` 不提交。
+- 项目继承账号既有 Pages 域名：GitHub Pages 入口跳转至 [www.zruler.fun/free-tts/](https://www.zruler.fun/free-tts/)。没有更改账号级域名或 DNS。

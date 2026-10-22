@@ -10,6 +10,14 @@
 
 The workbench interface and detailed supporting tutorials are currently in Chinese. This English README provides the complete project overview, Azure setup path, usage instructions, privacy boundaries and deployment steps. Locale codes and Azure voice identifiers remain visible in the interface.
 
+## Watch the 61-second introduction
+
+Meet free-tts: online text-to-speech, voice and prosody controls, MP3 downloads, Azure F0 usage and session-only key privacy. **Click the cover to watch on the project website.** The video has Chinese narration and captions.
+
+[![Watch the free-tts project introduction: let your words be heard](docs/images/free-tts-cover.jpg)](https://www.zruler.fun/free-tts/#video)
+
+[▶ Watch on the website](https://www.zruler.fun/free-tts/#video) · [Open the MP4 directly](https://www.zruler.fun/free-tts/media/free-tts-intro.mp4) · 61 seconds / 1080p
+
 ## What can I use this TTS tool for?
 
 - **Text-to-speech:** convert articles, stories, announcements or study materials into MP3 audio.

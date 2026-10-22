@@ -7,3 +7,5 @@
 *.bat text eol=crlf
 *.png binary
 *.jpg binary
+*.mp4 binary
+*.vtt text eol=lf

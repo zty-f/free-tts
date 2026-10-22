@@ -218,8 +218,9 @@ export function createApp({ configPath = DEFAULT_CONFIG, requestAzure = azureReq
         if (!page) throw new AppError(404, '未找到这篇教程。');
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); return res.end(page);
       }
-      if (req.method === 'GET' && pathname === '/guide-assets/workbench.jpg') {
-        const image = await readFile(path.join(ROOT, 'docs/images/workbench.jpg'));
+      const guideImage = { '/guide-assets/workbench.jpg': 'workbench.jpg', '/guide-assets/free-tts-cover.jpg': 'free-tts-cover.jpg' }[pathname];
+      if (req.method === 'GET' && guideImage) {
+        const image = await readFile(path.join(ROOT, 'docs/images', guideImage));
         res.writeHead(200, { 'Content-Type': 'image/jpeg' }); return res.end(image);
       }
       const assets = { '/': ['index.html', 'text/html; charset=utf-8'], '/app.js': ['app.js', 'text/javascript; charset=utf-8'], '/metrics.js': ['metrics.js', 'text/javascript; charset=utf-8'], '/style.css': ['style.css', 'text/css; charset=utf-8'], '/docs.css': ['docs.css', 'text/css; charset=utf-8'] };

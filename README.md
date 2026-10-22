@@ -10,6 +10,14 @@ Free, open-source text-to-speech (TTS) web app powered by your own Azure Speech 
 
 > 软件采用 MIT 许可证。在线版需要你自己的 Azure Speech 密钥和区域，不提供公共密钥。免费使用的前提是有效 Azure 订阅、Speech Free F0 资源以及符合免费配额；不是不限量免费服务。版本 v0.2.0，Azure 规则核对：2026-10-22。
 
+## 61 秒视频：认识 free-tts
+
+从“文案写好了，声音呢？”开始，看看在线语音合成、音色与参数调节、MP3 下载，以及免费额度和密钥隐私。**点击封面，在官网直接播放**；视频包含中文旁白与字幕。
+
+[![播放 free-tts 项目介绍：让下一段文字，先被听见](docs/images/free-tts-cover.jpg)](https://www.zruler.fun/free-tts/#video)
+
+[▶ 在官网观看](https://www.zruler.fun/free-tts/#video) · [直接打开 MP4](https://www.zruler.fun/free-tts/media/free-tts-intro.mp4) · 61 秒 / 1080p
+
 ## 这个免费 TTS 工具适合做什么？
 
 - **文字转语音 / 文本转语音**：把文章、故事、通知或学习材料转换为可播放的 MP3。

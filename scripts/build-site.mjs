@@ -19,6 +19,11 @@ export async function buildSite({ root = ROOT, output = path.join(ROOT, '_site')
   await copyFile(path.join(root, 'site/style.css'), path.join(output, 'site.css'));
   await copyFile(path.join(root, 'public/docs.css'), path.join(output, 'docs.css'));
   await copyFile(path.join(root, 'docs/images/workbench.jpg'), path.join(output, 'guide-assets/workbench.jpg'));
+  await copyFile(path.join(root, 'docs/images/free-tts-cover.jpg'), path.join(output, 'guide-assets/free-tts-cover.jpg'));
+  await mkdir(path.join(output, 'media'), { recursive: true });
+  for (const file of ['free-tts-intro.mp4', 'free-tts-intro.zh-CN.vtt']) {
+    await copyFile(path.join(root, 'site/media', file), path.join(output, 'media', file));
+  }
   const workbench = path.join(output, 'workbench');
   await mkdir(workbench, { recursive: true });
   const online = await readFile(path.join(root, 'site/workbench/index.html'), 'utf8');

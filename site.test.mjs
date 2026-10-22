@@ -37,7 +37,7 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
       assert.match(html, /name="description" content="[^"]+"/);
       const isWorkbench = path.relative(output, file).split(path.sep).join('/') === 'workbench/index.html';
       if (!isWorkbench) assert.doesNotMatch(html, /<input|<script/);
-      for (const [, href] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+      for (const [, href] of html.matchAll(/(?:href|src|poster)="([^"]+)"/g)) {
         if (/^(?:https?:|data:|#)/.test(href)) continue;
         const page = `https://example.test/free-tts/${path.relative(output, file).split(path.sep).join('/')}`;
         const url = new URL(href, page);
@@ -50,6 +50,13 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
     assert.match(home, /downloads\/free-tts-0\.2\.0\.zip/);
     assert.match(home, /href="\/free-tts\/workbench\/"/);
     assert.match(home, /href="\/free-tts\/guide\/english\/"/);
+    const player = home.match(/<video\b[^>]*>[\s\S]*?<\/video>/)?.[0];
+    assert.ok(player, 'homepage includes the project video');
+    assert.match(player, /controls playsinline preload="none"/);
+    assert.doesNotMatch(player, /autoplay/);
+    assert.match(player, /<track kind="captions"/);
+    assert.equal((await stat(path.join(output, 'media/free-tts-intro.mp4'))).size, (await stat(new URL('./site/media/free-tts-intro.mp4', import.meta.url))).size);
+    assert.match(await readFile(path.join(output, 'media/free-tts-intro.zh-CN.vtt'), 'utf8'), /^WEBVTT\n/);
     assert.match(await readFile(path.join(output, 'guide/azure-f0-setup/index.html'), 'utf8'), /返回项目首页/);
     const workbench = await readFile(path.join(output, 'workbench/index.html'), 'utf8');
     assert.match(workbench, /type="password"/);
@@ -70,6 +77,7 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
       const page = await readFile(path.join(output, 'guide', slug, 'index.html'), 'utf8');
       assert.match(page, /hreflang="en" href="https:\/\/www\.zruler\.fun\/free-tts\/guide\/english\/"/);
       assert.match(page, /hreflang="zh-Hans" href="https:\/\/www\.zruler\.fun\/free-tts\/guide\/index\/"/);
+      assert.match(page, /href="https:\/\/www\.zruler\.fun\/free-tts\/#video"[^>]*><img src="\/free-tts\/guide-assets\/free-tts-cover\.jpg"/);
     }
     const map = await readFile(path.join(output, 'sitemap.xml'), 'utf8');
     assert.equal([...map.matchAll(/<loc>/g)].length, htmlFiles.length);

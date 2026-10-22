@@ -17,6 +17,10 @@ test('教程渲染安全转义 HTML，拒绝脚本链接并转换内部导航', 
   assert.equal(html.includes('<script>'), false); assert.equal(html.includes('href="javascript:'), false);
   assert.match(html, /href="\/guide\/azure-f0-setup"/); assert.match(html, /noopener noreferrer/);
   assert.equal(await guidePage(root, '../../.local/config'), null);
+  const cover = renderMarkdown('[![观看介绍](docs/images/free-tts-cover.jpg)](https://www.zruler.fun/free-tts/#video)', { basePath: '/free-tts/' });
+  assert.match(cover, /<a href="https:\/\/www\.zruler\.fun\/free-tts\/#video"[^>]*><img src="\/free-tts\/guide-assets\/free-tts-cover.jpg"/);
+  const unsafeCover = renderMarkdown('[![外部图片](https://example.test/pixel.jpg)](javascript:alert)');
+  assert.doesNotMatch(unsafeCover, /<img|href="javascript:/);
 });
 test('源码打包白名单排除密钥、缓存和个人运行记录', async () => {
   const files = await sourceFiles(root);

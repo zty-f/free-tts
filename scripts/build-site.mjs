@@ -17,6 +17,15 @@ export async function buildSite({ root = ROOT, output = path.join(ROOT, '_site')
   await copyFile(path.join(root, 'site/style.css'), path.join(output, 'site.css'));
   await copyFile(path.join(root, 'public/docs.css'), path.join(output, 'docs.css'));
   await copyFile(path.join(root, 'docs/images/workbench.jpg'), path.join(output, 'guide-assets/workbench.jpg'));
+  const workbench = path.join(output, 'workbench');
+  await mkdir(workbench, { recursive: true });
+  const online = await readFile(path.join(root, 'site/workbench/index.html'), 'utf8');
+  await writeFile(path.join(workbench, 'index.html'), online.replaceAll('{{BASE}}', basePath));
+  for (const file of ['app.js', 'style.css']) await copyFile(path.join(root, 'site/workbench', file), path.join(workbench, file));
+  const azure = await readFile(path.join(root, 'site/workbench/azure.js'), 'utf8');
+  await writeFile(path.join(workbench, 'azure.js'), azure.replace('../../public/metrics.js', './metrics.js'));
+  await copyFile(path.join(root, 'public/style.css'), path.join(workbench, 'base.css'));
+  await copyFile(path.join(root, 'public/metrics.js'), path.join(workbench, 'metrics.js'));
   await writeFile(path.join(output, '.nojekyll'), '');
   for (const [slug] of topics) {
     const directory = path.join(output, 'guide', slug);
@@ -25,7 +34,7 @@ export async function buildSite({ root = ROOT, output = path.join(ROOT, '_site')
   }
   const { version } = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
   await writeFile(path.join(output, 'downloads', `free-tts-${version}.zip`), makeZip(await sourceFiles(root)));
-  return { output, pages: topics.length + 1, basePath };
+  return { output, pages: topics.length + 2, basePath };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const result = await buildSite({ basePath: process.env.SITE_BASE_PATH || '/free-tts/' });

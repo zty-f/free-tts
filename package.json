@@ -1,7 +1,7 @@
 {
   "name": "free-tts",
-  "version": "0.1.0",
-  "description": "自带 Azure Speech 账号的个人语音工作台，附完整 F0 教程。",
+  "version": "0.2.0",
+  "description": "自带 Azure Speech 账号的在线与本地语音工作台，附完整 F0 教程。",
   "license": "MIT",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node scripts/start.mjs --open",
     "doctor": "node scripts/start.mjs --doctor",
-    "test": "node --test server.test.mjs release.test.mjs site.test.mjs",
+    "test": "node --test server.test.mjs release.test.mjs site.test.mjs online.test.mjs",
     "check": "node scripts/check.mjs",
     "package": "node scripts/package.mjs",
     "build:site": "node scripts/build-site.mjs"

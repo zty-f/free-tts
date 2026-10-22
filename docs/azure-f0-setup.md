@@ -39,7 +39,7 @@
 1. 在 Speech 资源左侧菜单找到「资源管理 → 密钥和终结点 / Keys and Endpoint」。
 2. 复制 **KEY 1** 或 **KEY 2** 中的任意一个；它们都是完整密钥，不是 Subscription ID。
 3. 找到「Location / Region」，复制区域代码，例如 `eastasia`、`southeastasia` 或 `eastus`。这些只是例子，以本资源实际显示为准。
-4. 在 free-tts「连接设置」填写密钥及区域，点击「保存并连接」。本地版不需要填写完整 Endpoint 网址。
+4. 在 [在线工作台](https://zty-f.github.io/free-tts/workbench/) 填写密钥及区域，点击「连接 Azure」；或在本地版点击「保存并连接」。两者都不需要填写完整 Endpoint 网址。
 
 **成功标志：Azure 资源显示 F0，free-tts 获取到当前区域的音色。获取音色成功只验证连通性，不能由此认定资源就是 F0。**
 
@@ -52,4 +52,4 @@
 
 官方依据：[Speech 定价](https://azure.microsoft.com/en-us/pricing/details/speech/) · [配额与限制](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-services-quotas-and-limits) · [文字转语音快速开始](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-text-to-speech)。
 
-下一步：[安装和启动 free-tts](local-setup.md)。
+下一步：[在线使用（免安装）](online-workbench.md)；也可选择 [安装本地版](local-setup.md)。

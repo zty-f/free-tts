@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const allowed = ['package.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', '.gitignore', '.gitattributes', 'server.mjs', 'server.test.mjs', 'release.test.mjs', 'site.test.mjs', 'start.sh', '启动free-tts.command', '启动free-tts.bat', 'public', 'site', 'lib', 'scripts', 'docs', '.github'];
+const allowed = ['package.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', '.gitignore', '.gitattributes', 'server.mjs', 'server.test.mjs', 'release.test.mjs', 'site.test.mjs', 'online.test.mjs', 'start.sh', '启动free-tts.command', '启动free-tts.bat', 'public', 'site', 'lib', 'scripts', 'docs', '.github'];
 export async function sourceFiles(root = ROOT) {
   const files = [];
   async function visit(relative) {

@@ -1,10 +1,12 @@
-# 03 · 安装与跨平台启动
+# 本地版 · 安装与跨平台启动
 
 目标：在自己的电脑打开 free-tts 网页。它是本机网页服务，不需要购买服务器，也不需要把项目上传到网站平台。
 
+如果只想马上使用，可以直接打开 [在线工作台](online-workbench.md)，跳过本页安装步骤。本地版适合希望在磁盘保留音频历史或通过 curl 使用终端代理的用户。
+
 ## 下载安装包或源码
 
-打开 [项目首页](https://zty-f.github.io/free-tts/)，点击「下载 v0.1.0 源码」，或直接 [下载源码 ZIP](https://zty-f.github.io/free-tts/downloads/free-tts-0.1.0.zip)。也可以在 [GitHub 仓库](https://github.com/zty-f/free-tts) 点击「Code → Download ZIP」。
+打开 [项目首页](https://zty-f.github.io/free-tts/)，点击「下载本地版源码」，或直接 [下载源码 ZIP](https://zty-f.github.io/free-tts/downloads/free-tts-0.2.0.zip)。也可以在 [GitHub 仓库](https://github.com/zty-f/free-tts) 点击「Code → Download ZIP」。
 
 如果已安装 Git，可使用：
 

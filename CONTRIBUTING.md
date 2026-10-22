@@ -36,4 +36,6 @@ npm run package
 
 ## 在线教程站
 
-`site/` 保存静态首页；`npm run build:site` 将首页、Markdown 教程与源码 ZIP 输出到 `_site/`。Pages 工作流自动发布 main，`_site/` 不提交 Git。更改路由时执行 `npm test` 检查 `/free-tts/` 子路径下的导航和资源。GitHub Actions 在 Windows、macOS、Linux 的 Node.js 22/24 上运行环境检查和测试；CI 不调用真实 Azure。
+`site/` 保存静态首页和在线工作台；`npm run build:site` 将首页、Markdown 教程与源码 ZIP 输出到 `_site/`。Pages 工作流自动发布 main，`_site/` 不提交 Git。更改路由时执行 `npm test` 检查 `/free-tts/` 子路径下的导航和资源。GitHub Actions 在 Windows、macOS、Linux 的 Node.js 22/24 上运行环境检查和测试；CI 不调用真实 Azure。
+
+在线代码位于 `site/workbench/`，通过浏览器 fetch 直连官方 REST 接口，无运行时依赖。构建时共用 public/metrics.js 与本地版样式。在线版密钥只存于当前页面内存，不添加记住密钥、遥测、共享密钥或项目后端代理；修改网络代码需检查 URL、重定向、错误及存储边界。

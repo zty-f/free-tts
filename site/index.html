@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="用自己的 Azure Speech F0 免费额度，把文字变成语音。从注册 Azure、创建 Speech 到在自己的电脑生成 MP3，一份完整中文教程。">
+  <meta name="description" content="用自己的 Azure Speech F0 免费额度，把文字变成语音。从注册 Azure、创建 Speech 到在线生成 MP3，一份完整中文教程。">
   <meta name="theme-color" content="#166c56">
   <title>free-tts · 你的文字，你的声音</title>
   <link rel="icon" href="data:,">
@@ -13,18 +13,18 @@
   <a class="skip" href="#content">跳到正文</a>
   <header class="wrap topbar">
     <a class="brand" href="{{BASE}}" aria-label="free-tts 首页"><span class="mark" aria-hidden="true">≋</span> free-tts</a>
-    <nav aria-label="主导航"><a href="{{BASE}}guide/index/">使用教程</a><a href="https://github.com/zty-f/free-tts">GitHub ↗</a></nav>
+    <nav aria-label="主导航"><a href="{{BASE}}workbench/">在线工作台</a><a href="{{BASE}}guide/index/">使用教程</a><a href="https://github.com/zty-f/free-tts">GitHub ↗</a></nav>
   </header>
   <main id="content">
     <section class="wrap hero">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="dot"></span> 开源 · 本机运行 · 自带 Azure 账号</p>
+        <p class="eyebrow"><span class="dot"></span> 开源 · 在线即用 · 自带 Azure 账号</p>
         <h1>把你的文字，<br>变成好听的声音。</h1>
         <p class="intro">用自己的 Azure Speech 免费额度，搭建个人配音工作台。选音色、调语速、试听、下载 MP3，从一段文字开始。</p>
-        <div class="actions"><a class="button primary" href="{{BASE}}guide/azure-registration/">从零开始 →</a><a class="button secondary" href="{{BASE}}downloads/free-tts-0.1.0.zip" download>下载 v0.1.0 源码</a></div>
-        <p class="hint">已有 Azure F0？直接看 <a href="{{BASE}}guide/local-setup/">安装与启动教程</a>。支持 macOS / Windows / Linux。</p>
+        <div class="actions"><a class="button primary" href="{{BASE}}workbench/">打开在线工作台 →</a><a class="button secondary" href="{{BASE}}downloads/free-tts-0.2.0.zip" download>下载本地版源码</a></div>
+        <p class="hint">无需安装，填密钥和区域即可使用。第一次接触？看 <a href="{{BASE}}guide/azure-registration/">Azure 注册教程</a>。</p>
       </div>
-      <figure class="preview"><div class="preview-bar"><span class="dot"></span> 你的本机工作台 <span>127.0.0.1</span></div><img src="{{BASE}}guide-assets/workbench.jpg" width="1280" height="720" alt="free-tts 工作台：输入文字、选择音色、生成并下载语音"><figcaption>网页在电脑上运行，语音由你自己的 Azure 资源生成。</figcaption></figure>
+      <figure class="preview"><div class="preview-bar"><span class="dot"></span> 你的语音工作台 <span>Azure Speech</span></div><img src="{{BASE}}guide-assets/workbench.jpg" width="1280" height="720" alt="free-tts 本地版工作台示例：输入文字、选择音色、生成并下载语音"><figcaption>工作台界面示例（本地版）· 在线版使用当前页面内存保存密钥。</figcaption></figure>
     </section>
 
     <section class="quota wrap" aria-labelledby="quota-title">
@@ -37,24 +37,24 @@
       <div class="steps">
         <a class="step" href="{{BASE}}guide/azure-registration/"><span class="number">01</span><h3>注册 Azure</h3><p>激活自己的订阅，了解银行卡验证和 30 天试用。</p><span class="step-link">查看注册流程 ↗</span></a>
         <a class="step" href="{{BASE}}guide/azure-f0-setup/"><span class="number">02</span><h3>创建 Speech F0</h3><p>选择 Free F0，找到密钥和区域代码，确认资源定价层。</p><span class="step-link">查看配置教程 ↗</span></a>
-        <a class="step" href="{{BASE}}guide/local-setup/"><span class="number">03</span><h3>下载并启动</h3><p>安装 Node.js，解压源码，双击对应系统的启动文件。</p><span class="step-link">查看启动方式 ↗</span></a>
-        <a class="step" href="{{BASE}}guide/usage/"><span class="number">04</span><h3>生成第一段语音</h3><p>在本机保存配置，选择音色，试听并下载 MP3。</p><span class="step-link">开始使用 ↗</span></a>
+        <a class="step" href="{{BASE}}guide/online-workbench/"><span class="number">03</span><h3>打开在线工作台</h3><p>无需安装，填入自己的密钥和区域，连接 Azure。</p><span class="step-link">查看在线使用说明 ↗</span></a>
+        <a class="step" href="{{BASE}}guide/usage/"><span class="number">04</span><h3>生成第一段语音</h3><p>选择音色、输入文字，试听后下载 MP3。</p><span class="step-link">开始使用 ↗</span></a>
       </div>
     </section>
 
     <section class="wrap details" aria-label="功能与数据说明">
-      <div><p class="eyebrow">简单，够日常用</p><h2>给文章、视频和学习材料配音。</h2><p>支持多语言普通 Neural 音色，调节语速与音调。最近 20 段音频保存在本机，相同内容和参数可复用缓存。</p><a href="{{BASE}}guide/usage/">看看工作台能做什么 →</a></div>
-      <div><p class="eyebrow">自己掌握配置</p><h2>用自己的账号，保存在自己的电脑。</h2><p>这个网站只提供教程和下载。密钥填在启动后的本机工作台，正文在生成时发送给 Microsoft Azure，本项目不提供公共密钥或共享语音接口。</p><a href="https://github.com/zty-f/free-tts/blob/main/SECURITY.md">查看安全与隐私说明 →</a></div>
+      <div><p class="eyebrow">简单，够日常用</p><h2>给文章、视频和学习材料配音。</h2><p>支持多语言普通 Neural 音色，调节语速与音调。在线版生成后直接试听和下载；本地版另有最近 20 段音频缓存。</p><a href="{{BASE}}guide/usage/">看看工作台能做什么 →</a></div>
+      <div><p class="eyebrow">自己掌握配置</p><h2>用自己的账号，密钥仅留在当前页面。</h2><p>在线工作台由浏览器直连 Microsoft Azure，密钥和正文不经过项目后端。密钥仅在本页内存中保存，刷新、离开或关闭后需重填；音频请及时下载。</p><a href="https://github.com/zty-f/free-tts/blob/main/SECURITY.md">查看安全与隐私说明 →</a></div>
     </section>
 
     <section class="wrap faq" aria-labelledby="faq-title">
       <h2 id="faq-title">你可能还想知道</h2>
-      <details><summary>需要购买服务器吗？</summary><p>不需要。语音工作台在自己的电脑运行，需要 Node.js 22+ 和 curl，并联网访问 Azure。本网站使用 GitHub Pages 托管教程。</p></details>
+      <details><summary>需要购买服务器吗？</summary><p>不需要。打开在线工作台即可使用，无需安装 Node.js。网站由 GitHub Pages 托管，浏览器直接连接你自己的 Azure Speech；本地版仍可下载使用。</p></details>
       <details><summary>200 美元赠金和每月免费额度是一回事吗？</summary><p>不是。200 美元是符合资格的新账号前 30 天试用赠金；F0 是 Speech 资源的月度免费层。试用到期后通常需升级订阅才能继续使用，资源保持 F0。<a href="{{BASE}}guide/subscription/">阅读订阅到期说明</a>。</p></details>
-      <details><summary>可以直接在这个网站生成语音吗？</summary><p>请先下载源码并在本机启动，工作台默认地址是 127.0.0.1:4318。这个在线站点提供完整教程和下载入口，不收集 Azure 密钥。</p></details>
+      <details><summary>可以直接在这个网站生成语音吗？</summary><p>可以。打开在线工作台，填写自己的 Azure 密钥和区域，连接后即可合成、试听和下载 MP3。密钥仅在本页内存中使用，不写入浏览器存储。</p></details>
       <details><summary>免费额度每月都会有吗？</summary><p>在有效 Azure 订阅和符合条件的 F0 资源下，每月按该层规则提供免费额度，不结转。以 Azure 当前政策和资源门户为准。<a href="https://azure.microsoft.com/en-us/pricing/details/speech/">查看官方定价</a>。</p></details>
     </section>
-    <section class="wrap final-cta"><div><p class="eyebrow">从一段文字开始</p><h2>下一段声音，自己来做。</h2></div><a class="button primary" href="{{BASE}}guide/index/">打开完整教程 →</a></section>
+    <section class="wrap final-cta"><div><p class="eyebrow">从一段文字开始</p><h2>下一段声音，自己来做。</h2></div><a class="button primary" href="{{BASE}}workbench/">开始在线合成 →</a></section>
   </main>
   <footer class="wrap footer"><span>free-tts · MIT 开源</span><div><a href="https://github.com/zty-f/free-tts/issues">反馈问题</a><a href="{{BASE}}guide/links/">官方链接</a><a href="https://github.com/zty-f/free-tts">查看源码 ↗</a></div><p>免费规则核对：2026-10-22，以 Azure 官方政策为准。本项目与 Microsoft 无隶属关系。</p></footer>
 </body>

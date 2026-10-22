@@ -52,3 +52,7 @@
 - 静态输出共 12 页：项目首页、在线工作台和 10 篇教程。检查覆盖子路径导航、模块导入、CSS、示例图和源码 ZIP；在线代码不使用浏览器持久存储或项目后端接口。
 
 CI 与线上部署结果请查看 [GitHub Actions](https://github.com/zty-f/free-tts/actions)。自动测试使用模拟上游，不在 CI 中配置真实密钥。
+
+- [v0.2.0 跨平台 CI](https://github.com/zty-f/free-tts/actions/runs/39720321972)：Windows、macOS、Linux 的 Node.js 22/24 六组检查全部通过；[Pages 部署](https://github.com/zty-f/free-tts/actions/runs/39720321895)成功。
+- 本地静态预览服务停止后，真实 Chrome 在正式网站成功连接 Azure 并生成可播放的 MP3，结果约 2.952 秒，下载链接可用。测试结束后已清除页面中的测试连接。
+- 线上工作台、全部模块/CSS、在线教程与更新后的使用教程返回 HTTP 200；公开 v0.2.0 ZIP 含 45 个源码文件，未发现本机密钥、配置或音频缓存。

@@ -8,6 +8,7 @@ import { guidePage } from './lib/docs.mjs';
 import { estimateTextCharacters, estimateMinutes } from './public/metrics.js';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
+const VERSION = JSON.parse(await readFile(path.join(ROOT, 'package.json'), 'utf8')).version;
 const DEFAULT_CONFIG = path.join(ROOT, '.local', 'config.json');
 const MAX_TEXT = 3000;
 const FALLBACK_VOICES = [
@@ -145,7 +146,7 @@ export function createApp({ configPath = DEFAULT_CONFIG, requestAzure = azureReq
       if (req.headers['sec-fetch-site'] === 'cross-site') throw new AppError(403, '不允许跨站访问。');
       if (req.headers.origin && !allowedHosts.map(h => `http://${h}`).includes(req.headers.origin)) throw new AppError(403, '不允许跨站访问。');
       const pathname = new URL(req.url, 'http://localhost').pathname;
-      if (req.method === 'GET' && pathname === '/api/health') return json(200, { app: 'free-tts', version: '0.1.0' });
+      if (req.method === 'GET' && pathname === '/api/health') return json(200, { app: 'free-tts', version: VERSION });
       if (req.method === 'GET' && pathname === '/api/config') {
         const c = await loadConfig(); return json(200, { configured: configured(c), region: c.region, maxText: MAX_TEXT });
       }

@@ -21,6 +21,7 @@ test('教程渲染安全转义 HTML，拒绝脚本链接并转换内部导航', 
 test('源码打包白名单排除密钥、缓存和个人运行记录', async () => {
   const files = await sourceFiles(root);
   assert.ok(files.some(f => f.name === 'LICENSE'));
+  assert.ok(files.some(f => f.name === 'README.en.md'));
   assert.ok(files.some(f => f.name === 'docs/azure-f0-setup.md'));
   assert.ok(files.some(f => f.name === '启动free-tts.bat'));
   assert.equal(files.some(f => /\.local|config\.json|\.env|\.(mp3|wav|log)$/.test(f.name)), false);

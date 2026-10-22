@@ -39,3 +39,13 @@ npm run package
 `site/` 保存静态首页和在线工作台；`npm run build:site` 将首页、Markdown 教程与源码 ZIP 输出到 `_site/`。Pages 工作流自动发布 main，`_site/` 不提交 Git。更改路由时执行 `npm test` 检查 `/free-tts/` 子路径下的导航和资源。GitHub Actions 在 Windows、macOS、Linux 的 Node.js 22/24 上运行环境检查和测试；CI 不调用真实 Azure。
 
 在线代码位于 `site/workbench/`，通过浏览器 fetch 直连官方 REST 接口，无运行时依赖。构建时共用 public/metrics.js 与本地版样式。在线版密钥只存于当前页面内存，不添加记住密钥、遥测、共享密钥或项目后端代理；修改网络代码需检查 URL、重定向、错误及存储边界。
+
+## 中英文文档与检索信息
+
+`README.md` 是中文入口，`README.en.md` 是英文入口，并在静态网站生成 English guide。功能、安装要求、免费条件、密钥保存范围及限制发生变化时，应同步更新两份文档。详细中文教程目前没有逐篇翻译，英文 README 明确说明界面和配套文档的语言范围。
+
+检索信息应围绕已经实现的文字转语音、TTS、speech synthesis、中文英文配音和 MP3 下载，不给未实现的语音转文字 / STT 添加功能标签。GitHub 的简介和 Topics 属于仓库设置，修改本地 package.json 不会自动更新它们。
+
+`lib/seo.mjs` 生成网页标题、摘要、canonical、社交分享信息及中英文说明页的双向 hreflang；构建同时生成项目路径下的 sitemap.xml。SITE_ORIGIN 默认为 `https://www.zruler.fun`，自行部署时改为自己的站点源地址，SITE_BASE_PATH 对应仓库路径。不会生成或修改博客根路径的 robots.txt。
+
+完整来源与维护说明见 [项目检索说明](docs/discoverability.md)。搜索引擎收录和排名由平台决定，不以“已添加关键词”宣称已获得排名。

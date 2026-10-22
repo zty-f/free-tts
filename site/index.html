@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="用自己的 Azure Speech F0 免费额度，把文字变成语音。从注册 Azure、创建 Speech 到在线生成 MP3，一份完整中文教程。">
+  {{SEO}}
   <meta name="theme-color" content="#166c56">
-  <title>free-tts · 你的文字，你的声音</title>
+  <link rel="sitemap" type="application/xml" href="{{BASE}}sitemap.xml">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="{{BASE}}site.css">
 </head>
@@ -13,14 +13,14 @@
   <a class="skip" href="#content">跳到正文</a>
   <header class="wrap topbar">
     <a class="brand" href="{{BASE}}" aria-label="free-tts 首页"><span class="mark" aria-hidden="true">≋</span> free-tts</a>
-    <nav aria-label="主导航"><a href="{{BASE}}workbench/">在线工作台</a><a href="{{BASE}}guide/index/">使用教程</a><a href="https://github.com/zty-f/free-tts">GitHub ↗</a></nav>
+    <nav aria-label="主导航"><a href="{{BASE}}workbench/">在线工作台</a><a href="{{BASE}}guide/index/">使用教程</a><a href="{{BASE}}guide/english/" lang="en">English</a><a href="https://github.com/zty-f/free-tts">GitHub ↗</a></nav>
   </header>
   <main id="content">
     <section class="wrap hero">
       <div class="hero-copy">
         <p class="eyebrow"><span class="dot"></span> 开源 · 在线即用 · 自带 Azure 账号</p>
-        <h1>把你的文字，<br>变成好听的声音。</h1>
-        <p class="intro">用自己的 Azure Speech 免费额度，搭建个人配音工作台。选音色、调语速、试听、下载 MP3，从一段文字开始。</p>
+        <h1>免费 TTS，<br>让文字开口说话。</h1>
+        <p class="intro">开源文字转语音与语音合成工具。使用自己的 Azure Speech F0 免费额度，选择中文、英文等多语言音色，在线配音、试听并下载 MP3。</p>
         <div class="actions"><a class="button primary" href="{{BASE}}workbench/">打开在线工作台 →</a><a class="button secondary" href="{{BASE}}downloads/free-tts-0.2.0.zip" download>下载本地版源码</a></div>
         <p class="hint">无需安装，填密钥和区域即可使用。第一次接触？看 <a href="{{BASE}}guide/azure-registration/">Azure 注册教程</a>。</p>
       </div>
@@ -49,6 +49,7 @@
 
     <section class="wrap faq" aria-labelledby="faq-title">
       <h2 id="faq-title">你可能还想知道</h2>
+      <details><summary>TTS 和“语音转文字”有什么区别？</summary><p>TTS（Text to Speech）是文字转语音，也称文本转语音、语音合成或配音。语音转文字是 STT（Speech to Text），用于语音识别和音频转写。free-tts 目前只支持 TTS，不提供录音转写。</p></details>
       <details><summary>需要购买服务器吗？</summary><p>不需要。打开在线工作台即可使用，无需安装 Node.js。网站由 GitHub Pages 托管，浏览器直接连接你自己的 Azure Speech；本地版仍可下载使用。</p></details>
       <details><summary>200 美元赠金和每月免费额度是一回事吗？</summary><p>不是。200 美元是符合资格的新账号前 30 天试用赠金；F0 是 Speech 资源的月度免费层。试用到期后通常需升级订阅才能继续使用，资源保持 F0。<a href="{{BASE}}guide/subscription/">阅读订阅到期说明</a>。</p></details>
       <details><summary>可以直接在这个网站生成语音吗？</summary><p>可以。打开在线工作台，填写自己的 Azure 密钥和区域，连接后即可合成、试听和下载 MP3。密钥仅在本页内存中使用，不写入浏览器存储。</p></details>

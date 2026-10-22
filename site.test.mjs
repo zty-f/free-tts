@@ -12,6 +12,7 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
     const output = path.join(temp, '_site');
     await buildSite({ output });
     const htmlFiles = [];
+    const canonicalUrls = [];
     async function visit(directory) {
       for (const entry of await readdir(directory, { withFileTypes: true })) {
         const full = path.join(directory, entry.name);
@@ -26,7 +27,14 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
     assert.equal(htmlFiles.length, topics.length + 2);
     for (const file of htmlFiles) {
       const html = await readFile(file, 'utf8');
-      assert.doesNotMatch(html, /\{\{BASE\}\}|href="\/guide\//);
+      assert.doesNotMatch(html, /\{\{[A-Z_]+\}\}|href="\/guide\//);
+      const canonical = html.match(/rel="canonical" href="([^"]+)"/g) || [];
+      assert.equal(canonical.length, 1, `${file}: one canonical URL`);
+      const url = canonical[0].match(/href="([^"]+)"/)[1];
+      assert.ok(url.startsWith('https://www.zruler.fun/free-tts/'));
+      canonicalUrls.push(url);
+      assert.ok(html.includes(`property="og:url" content="${url}"`));
+      assert.match(html, /name="description" content="[^"]+"/);
       const isWorkbench = path.relative(output, file).split(path.sep).join('/') === 'workbench/index.html';
       if (!isWorkbench) assert.doesNotMatch(html, /<input|<script/);
       for (const [, href] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
@@ -41,6 +49,7 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
     const home = await readFile(path.join(output, 'index.html'), 'utf8');
     assert.match(home, /downloads\/free-tts-0\.2\.0\.zip/);
     assert.match(home, /href="\/free-tts\/workbench\/"/);
+    assert.match(home, /href="\/free-tts\/guide\/english\/"/);
     assert.match(await readFile(path.join(output, 'guide/azure-f0-setup/index.html'), 'utf8'), /返回项目首页/);
     const workbench = await readFile(path.join(output, 'workbench/index.html'), 'utf8');
     assert.match(workbench, /type="password"/);
@@ -54,5 +63,17 @@ test('Pages 子路径导航、在线工作台资源和源码下载完整，构�
     }
     assert.match(await readFile(path.join(output, 'workbench/style.css'), 'utf8'), /@import url\("\.\/base.css"\)/);
     await stat(path.join(output, 'workbench/base.css'));
+    const english = await readFile(path.join(output, 'guide/english/index.html'), 'utf8');
+    assert.match(english, /<html lang="en">/);
+    assert.match(english, /Free Online Text-to-Speech/);
+    for (const slug of ['index', 'english']) {
+      const page = await readFile(path.join(output, 'guide', slug, 'index.html'), 'utf8');
+      assert.match(page, /hreflang="en" href="https:\/\/www\.zruler\.fun\/free-tts\/guide\/english\/"/);
+      assert.match(page, /hreflang="zh-Hans" href="https:\/\/www\.zruler\.fun\/free-tts\/guide\/index\/"/);
+    }
+    const map = await readFile(path.join(output, 'sitemap.xml'), 'utf8');
+    assert.equal([...map.matchAll(/<loc>/g)].length, htmlFiles.length);
+    for (const url of canonicalUrls) assert.ok(map.includes(`<loc>${url}</loc>`));
+    assert.doesNotMatch(map, /<loc>https:\/\/www\.zruler\.fun\/<\/loc>|\.local|downloads/);
   } finally { await rm(temp, { recursive: true, force: true }); }
 });

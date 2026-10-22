@@ -1,7 +1,7 @@
 {
   "name": "free-tts",
   "version": "0.2.0",
-  "description": "自带 Azure Speech 账号的在线与本地语音工作台，附完整 F0 教程。",
+  "description": "Free online TTS / 免费文字转语音：Azure Speech F0 语音合成、中文英文配音、MP3 试听下载，支持 BYOK 与本地运行。",
   "license": "MIT",
   "private": true,
   "type": "module",
@@ -15,5 +15,35 @@
     "check": "node scripts/check.mjs",
     "package": "node scripts/package.mjs",
     "build:site": "node scripts/build-site.mjs"
+  },
+  "keywords": [
+    "tts",
+    "free-tts",
+    "text-to-speech",
+    "speech-synthesis",
+    "azure-speech",
+    "neural-tts",
+    "chinese-tts",
+    "english-tts",
+    "online-tts",
+    "voiceover",
+    "mp3",
+    "byok",
+    "self-hosted",
+    "github-pages",
+    "文字转语音",
+    "文本转语音",
+    "免费TTS",
+    "语音合成",
+    "中文配音",
+    "英文配音"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zty-f/free-tts.git"
+  },
+  "homepage": "https://www.zruler.fun/free-tts/",
+  "bugs": {
+    "url": "https://github.com/zty-f/free-tts/issues"
   }
 }
